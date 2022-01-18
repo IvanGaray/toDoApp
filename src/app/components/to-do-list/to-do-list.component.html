@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <h1 class="title" style="text-align: center; color: #fff">
+      {{ title }}
+    </h1>
+
+    <div class="todos">
+      <form (submit)="addTodo()">
+        <input
+          type="text"
+          name="inputToDo"
+          placeholder="Write a task..."
+          class="todo-input"
+          [(ngModel)]="inputToDo"
+        />
+        <input *ngIf="inputToDo" type="submit" value="+" class="todo-submit" />
+      </form>
+      
+      <div
+        *ngFor="
+          let todo of todos;
+          let i = index;
+          let first = first;
+          let last = last
+        "
+        [ngClass]="{ first: first, last: last }"
+        class="todo {{ todo.completed ? 'done' : '' }}"
+      >
+        <button class="taskDone" (click)="toggleDone(i)">{{ todo.completed ? 'Done' : 'To do' }}</button>
+        <div class="content">{{ todo.content }}</div>
+        <button class="remove" (click)="deleteTodo(i)">Remove</button>
+      </div>
+    </div>
+  </div>
+</div>
